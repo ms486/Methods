@@ -1,0 +1,95 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[a4paper,left=2.5cm,right=2.5cm,bottom=3cm,top=2.5cm]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{setspace,dsfont,fourier}
+\usepackage{amsmath,amssymb,setspace}
+\usepackage[longnamesfirst,nonamebreak]{natbib}
+\usepackage{longtable,booktabs,pdfpages}
+\usepackage[english]{babel}
+\usepackage{eurosym,multirow,hyperref}
+\usepackage[refpage]{nomencl}
+
+\hypersetup{
+    colorlinks,%
+    citecolor=blue,%
+    filecolor=black,%
+    linkcolor=blue,%
+    urlcolor=black}
+
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\newcommand{\myappendix}{\appendix\myappnumbering}
+\setlength{\textwidth}{6.3in}
+\setlength{\textheight}{23.0cm}
+\setlength{\oddsidemargin}{0in}
+\setlength{\abovetopsep}{2ex}
+\renewcommand{\labelitemi}{}
+\newcommand{\Lik}{\mathcal{L}}
+\newcommand{\lau}{\lambda_u}
+\newcommand{\lae}{\lambda_e}
+\newcommand{\1}{\mathbb{1}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\de}{\delta}
+\newcommand{\ow}{\overline{w}}
+\newcommand{\uw}{\underline{w}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\makeatletter
+\newcommand{\mythanks}[1]{\hbox{\@textsuperscript{\normalfont#1}}}
+\makeatother
+
+%\renewcommand{\labelitemi}{}
+
+\begin{document}
+\doublespacing
+
+\title{\textcolor{blue}{Computational Methods in Economics}}
+
+\author{Modibo Sidibé}
+\date{}
+
+\maketitle
+\begin{center} {\large \textbf{Spring 2020} } \end{center}
+
+
+\begin{center} {\large \textbf{Outline} } \end{center}
+{\small
+
+Models used in modern economics do not usually have an analytical (or closed-form) solutions. The goal of this course is to introduce students to numerical methods (techniques to solve nonlinear equation, numerical optimization, numerical integration, interpolation and approximation techniques). Then, we will illustrate how economists use these methods with an emphasis on econometrics, labor economics, and industrial organization. The course will also teach the basics of scientific programming using R and C++ to smooth the transition of students with limited programming experiences. A general plan of the class is as follows:
+
+\begin{description}
+ \item[0] Introduction to Algorithms and R/C++.
+ \item[1] Big Data: Selection and Plots.
+ \item[2] Root Finding Techniques.
+ \item[3] Numerical Optimization.
+ \item[4] Numerical Integration.
+ \item[4] Interpolation and Extrapolation. 
+ \item[6] Approximation Techniques.
+\end{description}
+
+% \begin{itemize}
+%  \item \cite{Gourieroux1996,Stoer2002,Cameron2005,Nocedal2006,Press2007}
+% \end{itemize}
+% 
+% \clearpage
+\bibliographystyle{apalike}
+\bibliography{/home/ms486/Dropbox/Bib/general}
+\newpage	
+
+
+\end{document}
+
+
+
+

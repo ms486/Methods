@@ -1,0 +1,29 @@
+\begin{thebibliography}{}
+
+\bibitem[Cameron and Trivedi, 2005]{Cameron2005}
+Cameron, A.~C. and Trivedi, P.~K. (2005).
+\newblock {\em Microeconometrics: Methods and Applications}.
+\newblock Cambridge University Press.
+
+\bibitem[Gouriéroux and Monfort, 1996]{Gourieroux1996}
+Gouriéroux, C. and Monfort, A. (1996).
+\newblock {\em Simulation-based econometric methods}.
+\newblock CORE lectures. Oxford Univ. Press, Oxford.
+
+\bibitem[Nocedal and Wright, 2006]{Nocedal2006}
+Nocedal, J. and Wright, S. (2006).
+\newblock {\em Numerical optimization}.
+\newblock Springer series in operations research and financial engineering.
+  Springer, New York, NY, 2. ed. edition.
+
+\bibitem[Press et~al., 2007]{Press2007}
+Press, W.~H., Teukolsky, S.~A., Vetterling, W.~T., and Flannery, B.~P. (2007).
+\newblock {\em Numerical Recipes 3rd Edition: The Art of Scientific Computing}.
+\newblock Cambridge University Press, New York, NY, USA, 3 edition.
+
+\bibitem[Stoer and Bulirsch, 2002]{Stoer2002}
+Stoer, J. and Bulirsch, R. (2002).
+\newblock {\em Introduction to numerical analysis}.
+\newblock Texts in applied mathematics. Springer.
+
+\end{thebibliography}
