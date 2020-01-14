@@ -1,0 +1,208 @@
+\documentclass{beamer}
+\setbeamertemplate{navigation symbols}{}
+\usepackage[latin1]{inputenc}
+\usepackage{setspace,dsfont}
+\usepackage{amsmath,amssymb,pdfpages}
+\usepackage[longnamesfirst,nonamebreak]{natbib}
+\usepackage[english]{babel}
+\usepackage{eurosym,multirow,hyperref,cmll}
+\usepackage{listings}
+
+\newcommand{\Lik}{\mathcal{L}}
+\newcommand{\lau}{\lambda_u}
+\newcommand{\wi}{\underline{w}}
+\newcommand{\m}{\mathcal{M}}
+\newcommand{\wa}{\overline{w}}
+\newcommand{\lae}{\lambda_e}
+\newcommand{\1}{\mathbb{1}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\f}{\mathfrak{f}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Real}{\mathbb{R}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\ow}{\overline{w}}
+\newcommand{\uw}{\underline{w}}
+\newcommand{\de}{\delta}
+
+\hypersetup{
+    colorlinks,%
+    citecolor=blue,%
+    filecolor=blue,%
+    linkcolor=blue,%
+    urlcolor=blue,
+}
+%\usetheme{Boadilla}
+%\usetheme{Marburg}
+%\usetheme{Hannover}
+%\usetheme{Pittsburgh}
+%\usetheme{umbc1}
+%\usetheme{Montpellier}
+\usetheme{Singapore}
+%\usetheme{}
+%\usetheme{}
+%\lstset {language=C++}
+
+\DeclareMathOperator{\plim}{plim}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\begin{document}
+\begin{frame}
+\title{Computational Methods in Economics}
+\subtitle{Introduction}
+\titlepage
+\end{frame}
+
+\section{Generalities}
+
+\frame{\frametitle{Objectives}
+\begin{itemize}
+\item Introduction to serious data work. 
+\item Numerical methods to solve complex problems.
+\item Computational implementation. 
+\item Use data, model, and estimation 
+\end{itemize}
+}
+
+\frame{\frametitle{Example}
+\begin{itemize}
+\item Consider an optimal stopping model
+\begin{itemize}
+ \item Search for a product
+ \item Search for a job
+\end{itemize}
+\item Key feature is a reservation value. 
+\end{itemize}
+}
+
+\frame{\frametitle{Basic job search theory (1) - The basic model}
+\begin{itemize}
+\item Job search theory arises initially out of a basic model describing the behavior of a person looking for work in a situation of imperfect information
+\item The basic job search model has the following assumptions
+\begin{itemize}
+\item They are not allowed to select the intensity of their search 
+\item They cannot look for jobs once they are employed
+\item They cannot recall job offers once rejected (sequential search)
+\end{itemize}
+\end{itemize}
+}
+\frame{\frametitle{Basic job search theory (2) - The basic model}
+\begin{itemize}
+\item The job-seeker does not know exactly what wage each job pays. So by looking, he can expect to improve his prospect of earnings.
+\item We further assume that this distribution is the same at each date, and that successive wage offers are independent draws from this distribution
+\item The optimal strategy of a person looking for work consists simply of choosing a \emph{reservation wage} that represents the lowest remuneration he will accept
+\end{itemize}
+}
+
+\begin{frame}\frametitle{Wage posting}
+Revisiting \\ Burdett and Mortensen(1998) \\ Bontemps, Robin and Van der berg(2000)
+\end{frame}
+
+\begin{frame}\frametitle{Assumptions}
+\begin{itemize}
+\item Population $m$
+\item Stock of unemployed $u$
+\item Employment opportunities occur at rate $\lau$ representing the parameter of a Poisson Distribution. 
+\item Employment are destroyed at rate $\de$
+\item The utility of an agent consists of the wage $w$ if she is employed, or $b$ if she is unemployed. 
+\item The distributions of offered and accepted wages are respectively denoted by $F$, and $G$ with support $[\uw,\ow]$
+\item Individuals discount future earnings at rate $\rho$
+\item Firms post contract. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Agents problem: with on-the-job-search}
+Unemployed agents
+\begin{equation*}
+\rho V_u = b + \lau \int_{\phi}^{\overline{w}} \big[V^e(x) -V^u\big] dF(x)  
+\end{equation*}
+
+Employed agents
+\begin{equation*}
+\rho V_e(w) = w + \de[ V^u - V^e(w) ] + \lae \int_{w}^{\overline{w}} \big[V^e(x) -V^e(w)\big] dF(x)  
+\end{equation*}
+\end{frame}
+
+\begin{frame}\frametitle{Reservation wage (1)}
+The reservation wage is given by: 
+\begin{eqnarray*}
+\phi 
+ &=& b + \big[\lau -\lae\big] \int_{\phi}^{\overline{w}} \frac{\overline{F}(x)}{\rho+\delta+\lambda_e\overline{F}(x)}d(x) 
+\end{eqnarray*}
+\end{frame}
+
+\begin{frame}\frametitle{Reservation wage (2)}
+This is nonlinear equation, which requires root-finding techniques!
+\end{frame}
+
+
+\begin{frame}\frametitle{Reservation wage (3)}
+This is nonlinear equation, and as the wage offer distribution $F()$ is not observed, evaluating the reservation wage requires numerical integration. 
+\end{frame}
+
+\begin{frame}\frametitle{Reservation wage (4)}
+Assume b has a distribution such that there exists a $\phi(b)$. Evaluating $\phi$ is costly, so one may be tempted to create a grid for $b$, and evaluate for the values of the grid, and then use interpolation techniques to recover $\phi(b)$.
+\end{frame}
+
+\begin{frame}\frametitle{Reservation wage (5)}
+\begin{itemize}
+\item Given data on wages, it is possible to estimate all the structural parameters $\lau,\lae,\delta$ and the parameters of the wage offer distribution. 
+\item Let $\Theta$ be the set of parameters to be estimated and then consider the criterion function
+ \begin{equation}
+  min_{\Theta} || W - \hat{\phi}(\Theta) ||
+ \end{equation}
+\item Nonlinear optimization. 
+\end{itemize}
+\end{frame}
+
+
+\frame{\frametitle{Organization}
+\begin{itemize}
+\item Tuesday: Lecture
+\item Thursday: Applications
+\item Office hours: Email appointment 
+\item Questions? 
+\end{itemize}
+}
+
+\frame{\frametitle{Evaluation}
+\begin{itemize}
+\item Class applications (40\%)
+\item Problem sets (60\%)
+\end{itemize}
+}
+
+\frame{\frametitle{Plan of the course}
+\begin{itemize}
+\item Algorithm: Theory and Introduction to R/C++
+\item Data: Theory and Application
+\item Maximum Likelihood Estimation
+\item Root Finding Techniques
+\item Numerical Optimization
+\item Simulation Techniques
+\item Numerical Integration
+\item Interpolation and Extrapolation
+\item Dynamic Programming
+\item Final
+\end{itemize}
+}
+
+\frame{\frametitle{R/C++}
+ \begin{itemize}
+  \item Build R. 
+  \item Install Rstudio. 
+  \item Install some packages (Rcpp, RcppArmadillo, Zelig).
+  \item Compile a first c++ file. 
+ \end{itemize}
+}
+
+
+
+\end{document}
+
+
