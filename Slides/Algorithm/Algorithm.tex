@@ -1,0 +1,631 @@
+\documentclass{beamer}
+\setbeamertemplate{navigation symbols}{}
+\usepackage[latin1]{inputenc}
+\usepackage{setspace,dsfont}
+\usepackage{amsmath,amssymb,pdfpages}
+\usepackage[longnamesfirst,nonamebreak]{natbib}
+\usepackage[english]{babel}
+\usepackage{eurosym,multirow,hyperref,cmll}
+\usepackage{listings}
+
+\newcommand{\Lik}{\mathcal{L}}
+\newcommand{\lau}{\lambda_u}
+\newcommand{\wi}{\underline{w}}
+\newcommand{\m}{\mathcal{M}}
+\newcommand{\wa}{\overline{w}}
+\newcommand{\lae}{\lambda_e}
+\newcommand{\1}{\mathbb{1}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\f}{\mathfrak{f}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Real}{\mathbb{R}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\hc}{\mathcal{H}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\Z}{\mathcal{Z}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\Comp}{\matmhcal{K}}
+\newcommand{\Basis}{\mathcal{B}}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\J}{\mathcal{J}}
+\newcommand{\s}{\mathbb{s}}
+\newcommand{\sumj}{\sum_{\substack{j \in \J}}}
+\newcommand{\sumk}{\sum_{\substack{k \in \J_{j}}}}
+\newcommand{\suml}{\sum_{\substack{l \in \J_{j}}}}
+\newcommand{\sumktot}{\sum_{\substack{k \in \J}}}
+\newcommand{\sumw}{\sum_{l=1}^{L} \phi_l}
+\newcommand{\sumkl}{\sum_{\substack{k\in \J_{l}}}}
+\newcommand{\sumlk}{\sum_{\substack{l\in \J_{k}}}}
+\newcommand{\summk}{\sum_{\substack{m\in \J_{k}}}}
+\newcommand{\lju}{\lambda^u_j}
+\newcommand{\lje}{\lambda^e_j}
+\newcommand{\llu}{\lambda^u_l}
+\newcommand{\lle}{\lambda^e_l}
+\newcommand{\lku}{\lambda^u_k}
+\newcommand{\lke}{\lambda^e_k}
+\newcommand{\uj}{u_j}
+\newcommand{\mj}{m_j}
+\newcommand{\ow}{\overline{w}}
+\newcommand{\uw}{\underline{w}}
+\newcommand{\Fj}{F_j(w)}
+\newcommand{\fj}{f_j(w)}
+\newcommand{\Gj}{G_j(w)}
+\newcommand{\gj}{g_j(w)}
+\newcommand{\Vuj}{\mathcal{V}^u_{j}}
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\Vej}{\mathcal{V}^e_{j}}
+\newcommand{\Vel}{\mathcal{V}^e_{l}}
+\newcommand{\Ujt}{\mathcal{U}_{jt}}
+\newcommand{\Su}{\mathcal{S}}
+\newcommand{\up}{\underline{p}}
+
+\hypersetup{
+    colorlinks,%
+    citecolor=blue,%
+    filecolor=blue,%
+    linkcolor=blue,%
+    urlcolor=blue,
+}
+%\usetheme{Boadilla}
+%\usetheme{Marburg}
+%\usetheme{Hannover}
+%\usetheme{Pittsburgh}
+%\usetheme{umbc1}
+%\usetheme{Montpellier}
+\usetheme{Singapore}
+%\usetheme{}
+%\usetheme{}
+%\lstset {language=C++}
+
+\DeclareMathOperator{\plim}{plim}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\begin{document}
+\begin{frame}
+\title{Computational Methods in Economics}
+\subtitle{Algorithms}
+\titlepage
+\end{frame}
+
+\section{Theory}
+
+\frame{\frametitle{Computing and Algorithms}
+\begin{itemize}
+\item Algorithm: well-defined computational procedure that takes some value as \textbf{input} and produces some value as \textbf{output}.
+\item Designing an algorithm is about finding the most \textbf{efficient} way to create an input/output relationship.
+\end{itemize}
+}
+
+\frame{\frametitle{Stable Matching (1)}
+ \begin{itemize}
+\item Gale and Shapley (1962): Can we design a college admissions process or a job recruiting process that was self-enforcing?
+\item Consider the marriage problem. 
+\item A set of men and women desire to form partnerships. 
+\item Each woman has a preference ordering over men.
+\item Each man has a preference ordering over women.
+\item Based on those preferences, women make offers to men, and marriages happen. 
+\end{itemize}
+}
+
+\begin{frame}[fragile]\frametitle{Stable Matching (2)}
+Initially all m in M and w in W are free.
+\begin{footnotesize}
+\begin{verbatim}
+While there is a man m who is free and hasn't 
+proposed to every woman w
+Choose such a man m
+Let w be the highest-ranked woman in m's preference list
+to which m has not yet proposed
+   If w is free then
+   (m, w) become engaged
+   Else w is currently engaged to m'
+   If w prefers m' to m then
+     m remains free
+   Else w prefers m to m'
+     (m, w) become engaged
+     m' becomes free
+
+Endif
+   Endif
+Endwhile
+\end{verbatim}
+\end{footnotesize}
+\end{frame}
+
+% \frame{\frametitle{Example 1}
+%  \begin{itemize}
+%  \end{itemize}
+% }
+% 
+% \frame{\frametitle{Example 1}
+%  \begin{itemize}
+%  \end{itemize}
+% }
+% 
+% \frame{\frametitle{Example 1}
+%  \begin{itemize}
+%  \end{itemize}
+% }
+% 
+% \frame{\frametitle{Example 1}
+%  \begin{itemize}
+%  \end{itemize}
+% }
+
+\frame{\frametitle{Constraints}
+\begin{itemize}
+\item Physical constraints (RAM,  storage).
+\item Worst-case and average-case analysis. (Benchmark)
+\item Order of growth (scale).
+\end{itemize}
+}
+
+\frame{\frametitle{Structure}
+\begin{itemize}
+\item Initialization.
+\item Maintenance.
+\item Termination.
+\end{itemize}
+}
+
+\frame{\frametitle{Design}
+\begin{itemize}
+\item Incremental approach
+\item Divide and Conquer
+\end{itemize}
+}
+
+\begin{frame}\frametitle{Divide-and-conquer approach}
+\begin{itemize}
+\item \textbf{Divide} the problem into a number of subproblems that are smaller instances of the same problem.
+\item \textbf{Conquer} the subproblems by solving them recursively. 
+\item \textbf{Combine} the solutions to the subproblems into the solution for the original problem.
+\end{itemize}
+\end{frame}
+
+
+\frame{\frametitle{Examples}
+\begin{itemize}
+\item Search and Matching
+\item EM algorithm
+\end{itemize}
+}
+
+\section{Example 1}
+
+\frame{\tableofcontents[currentsection,hideothersubsections,currentsubsection]}
+
+\begin{frame}
+\frametitle{Searching, Matching and Migrating: Space and population}
+%\framesubtitle{Cities as local labor markets}
+\begin{itemize}
+\item Geography 
+\begin{itemize}
+\item \textbf{Discrete} set $\J$ of $J$ cities $j$ where people both live and work
+%\item Local amenity $a_j$ (set to 0 in this theoretical exercise)
+\item Exogenous sites summarized by the distance matrix $d=(d_{jl})$
+\item Endogenous\textbf{ population} size $L_j$ and \textbf{number of firms} $N_j$
+\item Some cities may disappear in equilibrium
+\end{itemize}\bigskip
+\item Land market
+\begin{itemize}
+\item Discrete choice: \textbf{one unit} of land per individual
+\item Competition between \textbf{commercial} and residential real estate
+\item Firms, vacant or active, consume $\psi$ units
+%\item Note that limited arbitrage in housing might yield higher volatility
+\begin{equation*}
+R_j= R(L_j+\psi N_j)
+\end{equation*}
+\end{itemize}
+%\smallskip
+\item All individuals are \textbf{workers}
+\begin{itemize}
+\item Fixed total population (normalized to 1)
+\item Endowed with individual \textbf{ability} $h\sim \ell(\cdot)=U([0,1])$
+\item Die at rate $\Xi$ (perpetual youth, exit value set to zero)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Searching, Matching and Migrating: Workers}
+\begin{itemize}
+\item Set-up 
+\begin{itemize}
+\item Maximize total discounted (at rate $r$) lifetime income
+\item \textbf{Unemployed} $i=u$ are in measure $u_j(h)$ and earn $b$ (fixed)
+\item \textbf{Employed} $i=e$ are in measure $\ell_j(h)-u_j(h)$ and earn $w$
+%\item Earn $w$ when employed and $b$ when unemployed 
+\item All workers are endowed with bargaining power $\beta$
+\item Mobility cost $\phi_{jl}=\phi(d_{jl})$ between two cities
+\end{itemize} \bigskip
+\item Initial location problem
+\begin{itemize}
+\item New urban workers, in measure $\omega_j(h)$, start off as unemployed
+\item \textbf{Reshuffling} is irrespective of skills (no skill dynasties):
+\end{itemize}\smallskip
+\begin{equation*}
+\omega_j(h)=\Xi \ell(h)L_j
+\end{equation*}
+
+\vspace{0.3cm}
+\item Assumption: workers may only migrate upon finding a job
+\begin{itemize}
+%\item Means that high-skilled unemployed foreign workers cannot outbid low-skilled residents
+%\item Otherwise, low-skilled workers would disappear from some cities, which is counterfactual (Eeckhout et al., 2014)
+\item Means that mobility costs (or housing market frictions) are very high for unemployed workers 
+%\item Or that spatial differences in the value of unemployment are small
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Searching, Matching and Migrating: Firms}
+\vspace{-0.3cm}
+\begin{itemize}
+\item Set-up
+\begin{itemize}
+\item Distribution of latent \textbf{productivity} $p\sim g(\cdot)=U([0,1])$
+\item Firms equate \textbf{jobs}: not a theory of firm size
+%\item Firms, even vacant, pay rent $\psi R_j$
+\item Value of a type-$p$ vacancy: $\Pi_j^v(p)$
+\item If matched, \textbf{location-invariant} production technology $f(h,p)$%, with $f_h(h,p)\geq 0$ and $f_p(h,p)\geq 0$ and possible complementarity
+\end{itemize}\medskip
+\item Vacancies
+\begin{itemize}
+\item Local measure of type-$p$ vacancy $v_j(p)$
+\item Total number of vacancies $V_j=\int v_j(p)dp$
+\item \textbf{Selection}: lower bound $\up_j$ s.t. $\Pi_j^v(\up_j)=0$
+%\item Entry cost $c$ is sunk and paid before observing $p$
+%\item \textbf{Free entry} determines number of (i.i.d.) draws:
+\end{itemize}\medskip
+%\begin{equation*}
+%\small{c=(1-\up_j)\int_{\up_j}^1 \Pi^v_j(p)\tfrac{v_j(p)}{V_j}dp}
+%\end{equation*}
+%\vspace{-0.4cm}
+\item Matches
+\begin{itemize}
+\item Joint match distribution $m_j(h,p)$
+\item Exogenous destruction at rate $\delta$
+\item Local accounting relationship $L_j-U_j\equiv N_j-V_j$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}\frametitle{Searching, Matching and Migrating: Search}
+\begin{itemize}
+\item Set-up
+\begin{itemize}
+\item Continuous time, infinite horizon, \textbf{random} search
+\item Both off-the-job and on-the-job \& both within and between cities
+\end{itemize}\medskip
+\item Jobseekers
+\begin{itemize}
+\item Intensity-adjusted measure $E_j$ of jobseekers in city $j$
+\item $\varrho_{lj}=\varrho(d_{jl})\in[0,1]$ \textbf{connectedness} of workers in $l$ to jobs in $j$
+\item $\zeta$ relative search efficiency of employed workers
+\begin{equation*}
+\small{E_j=U_j+\zeta(L_j-U_j)+\textcolor{blue}{\sum_{k\neq j}\varrho_{kj} \left[U_k+\zeta(L_k-U_k)\right]}}
+\end{equation*}
+\end{itemize}
+\vspace{-0.5cm}
+\item Matching
+\begin{itemize}
+\item $\mathcal{M}(E_j,V_j)$ number of matches in $j$ and $\theta_{lj}=\tfrac{\varrho_{lj} \mathcal{M}(E_j,V_j)}{E_j\times V_j}$
+\end{itemize}
+\end{itemize}
+\centering
+\textbf{Meeting rates}
+\begin{tabular}{|l|c|c|}
+\hline
+& \small{Worker $(i,j)$ $\rightarrow$ Vacancy in $l$} & \small{Vacancy in $j$ $\rightarrow$ Worker $(i,l)$} \\[-1ex]
+& \small{(independent of $h$)} & \small{(independent of $p$)}\\
+\hline
+$i=u$ & $\theta_{jl}v_l(p)$ & $\theta_{lj}u_l(h)$\\\hline
+$i=e$ & $\zeta\theta_{jl}v_l(p)$ & $\zeta\theta_{lj}m_l(h,p')$\\\hline
+\end{tabular}
+\end{frame}
+
+\begin{frame}\frametitle{Searching, Matching and Migrating: Value functions and surplus}
+\begin{itemize}
+\item Agents' value functions
+\begin{itemize}
+\item The value for a type-$p$ firm in city $j$ when matched with a type-$h$ worker paid at wage $w$ is $\Pi^f_{j}(h,w,p)$ 
+\item The corresponding value for the worker is $\Vej(h,w,p)$ 
+\item The value of a type-$h$ unemployed worker in city $j$ is $\Vuj(h)$
+\end{itemize}\medskip
+\item Match product (\textbf{transferability})
+\begin{equation*}
+\forall w,\hspace{0.2cm}\mathbb{P}_j(h,p)\equiv \Pi^f_j(h,w,p)+\Vej(h,w,p)
+\end{equation*}
+%\smallskip
+\item Surplus
+\begin{eqnarray*}
+\Su^*_{jl}(h,p)=\mathbb{P}_l(h,p) - \Vuj(h) - \Pi^v_l(p)\\
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Searching, Matching and Migrating: Wage determination}
+\begin{itemize}
+\item Bargaining \`{a}-la Lise et al. (2016) over gross match surplus
+\begin{itemize}
+\item But match occurrence depends on net surplus
+\end{itemize}
+\end{itemize}
+\medskip
+
+\begin{itemize}
+\item Reservation-wage strategy $\psi_{jl}(h,p)$:
+\footnotesize
+\begin{eqnarray*}
+&&\hspace{-1.5cm}\forall p\in\textcolor{blue}{\mathcal{P}^0_{jl}(h)}\equiv\left\{y:\Su_{jl}(h,y)\geq 0\right\},\\\hspace{0.3cm}&&\Vel(h,\psi_{jl}(h,p),p)-\Vuj(h) = \beta \Su^*_{jl}(h,p)\\
+&&\hspace{-1.5cm}\forall h\in\textcolor{blue}{\mathcal{H}^0_{jl}(p)}\equiv\left\{x:\Su_{jl}(x,p)\geq 0\right\},\\\hspace{0.3cm}&&\Pi^f_l(h,\psi_{jl}(h,p),p)-\Pi^v_l(p) = (1-\beta) \Su^*_{jl}(h,p)
+\end{eqnarray*}\normalsize
+
+\medskip
+\item Firm-switching wage-change strategy $\psi_{jl}(h,p,p')$:
+\footnotesize
+\begin{eqnarray*}
+&&\hspace{-1.7cm}\forall p'\in\textcolor{blue}{\mathcal{P}^c_{jl}(h,p)}\equiv \left\{y:\Su_{jj}(h,p)\leq \Su_{jl}(h,y)\right\},\\
+&&\Vel(h,\psi_{jl}(h,p,p'),p') - \Vuj(h) =  \Su^*_{jj}(h, p) + \beta[ \Su^*_{jl}(h, p')-\Su^*_{jj}(h, p)] \\
+&&\hspace{-1.7cm}\forall p'\in \textcolor{blue}{\mathcal{P}^f_{jl}(h,p)}\equiv \left\{y:\Su_{jj}(h,y)\leq \Su_{jl}(h,p)\right\},\\
+&&\Pi^f_l(h,\psi_{jl}(h,p',p),p) -\Pi^v_l(p) = (1-\beta) [\Su^*_{jl}(h, p)- \Su^*_{jj}(h, p')]
+\end{eqnarray*}
+%\normalsize
+%\item Strategy sets $\mathcal{H}^0_{jl}(p)$, $\mathcal{P}^0_{jl}(h)$, $\mathcal{P}^c_{jl}(h,p)$ and $\mathcal{P}^f_{jl}(h,p)$ do not depend on $w$
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}\frametitle{Searching, Matching and Migrating: Bellman equations}
+%\framesubtitle{Risk-neutral agents maximize discounted (at rate $r$) lifetime utility or profit}
+\begin{itemize}
+\item Lifetime discounted \textbf{income} of a type-$h$ unemployed worker in city $j$:
+\vspace{-0.3cm}
+\begin{footnotesize}
+\begin{eqnarray*}
+\footnotesize
+\hspace{-1cm}(r+\Xi) \V^u_j(h) 
+=b-R_j +\sumktot  \theta_{jk} \int_{\mathcal{P}^0_{jk}(h)} \left[\V^e_k(h,\psi_{jk}(h,y),y)-\V^u_j(h)\right] v_k(y)dy
+\end{eqnarray*}
+\end{footnotesize}
+%\begin{itemize}
+\item Expected discounted \textbf{profit} of a type-$p$ vacancy in city $j$:
+\begin{footnotesize}
+\begin{eqnarray*}
+ &&\hspace{-2cm}r \Pi^v_j(p) 
+= -\psi R_j+ \sumktot \theta_{kj}
+\int_{\mathcal{H}^0_{kj}(p)}  \left[\Pi^f_j(x,\psi_{kj}(x,p),p)--\Pi_j^v(p)\right] u_k(x)dx\\
+&&\hspace{-1.5cm}+\zeta\sumktot \theta_{kj}\int_{\mathcal{H}^0_{kj}(p)}\int_{\mathcal{P}^f_{kj}(x,p)} \left[ 
+\Pi^f_j(x,\psi_{kj}(x,y,p),p)-(1-\beta)\phi_{jk}-\Pi^v_j(p) \right] m_k(x,y)dydx\notag
+\end{eqnarray*}
+\end{footnotesize}
+
+\item \textbf{Product} of a type-$(h,p)$ match in city $j$:\begin{footnotesize}
+\begin{eqnarray*}
+&&\hspace{-1.7cm}r\mathbb{P}_j(h,p)= f(h,p)\textcolor{blue}{-(1+\psi)R_j} -\delta\Big[\mathbb{P}_j(h,p)-(\V^u_j(h)+\Pi^v_j(p))\Big]-\Xi\Big[\mathbb{P}_j(h,p)-\Pi^v_j(p)\Big]\\
+&&\hspace{-0.8cm}-\textcolor{blue}{\zeta\sumktot\theta_{jk}\int_{\mathcal{P}^c_{jk}(h,p)} \left[\mathbb{P}_j(h,p)-\left(\V^e_k(h,\psi_{jk}(h,p,y),y)+\Pi^v_j(p)\right)\right]v_k(y)dy}
+\end{eqnarray*}
+\end{footnotesize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Searching, Matching and Migrating: Steady state}
+\begin{itemize}
+\item Destruction rate for a type-$(h,p)$ match in city $j$:
+\small
+\begin{eqnarray*}
+&&\delta_j(h,p)=\delta+\Xi+\zeta\sumktot\theta_{jk}\int_{\mathcal{P}^c_{jk}(h,p)} v_k(y)dy
+\end{eqnarray*}\normalsize
+\item Motion laws on the labor market:
+\small
+\vspace{-0.2cm}
+\centering
+\begin{footnotesize}
+\begin{eqnarray*}
+%\label{vj}
+\textcolor{blue}{u_j(h)}\left(\Xi+\sumktot \theta_{jk}  \int_{\mathcal{P}^0_{jk}(h)}v_k(y)dy\right)=\delta \int m_j(h,y)dy+\omega_j(h)
+\end{eqnarray*}
+\vspace{-0.5cm}
+\begin{eqnarray*}
+\textcolor{blue}{m_j(h,p)}\delta_j(h,p) = v_j(p)\sumktot \theta_{kj}\left(1_{h\in\mathcal{H}^0_{kj}(p)}u_k(h) + \zeta  \int_{\mathcal{P}^f_{kj}(h,p)} m_k(h,y)dy\right)
+\end{eqnarray*}
+\vspace{-0.5cm}
+\begin{eqnarray*}
+\textcolor{blue}{v_j(p)}\sumktot\theta_{kj}\int_{\mathcal{H}^0_{kj}(p)} \left(u_k(x)+\zeta\int_{\mathcal{P}^f_{kj}(x,p)}m_k(x,y)dy\right)dx=\int \delta_j(x,p)m_j(x,p)dx
+\end{eqnarray*}
+\end{footnotesize}
+
+\end{itemize}
+\end{frame}
+
+
+%\begin{frame}\frametitle{Searching, Matching and Migrating: Demographic equilibrium}
+%\begin{itemize}
+%\item Local measure of skills $\ell_j(h)$ verifies:
+%%\item Demographic constraint:
+%\begin{eqnarray*}
+%\underbrace{\omega_j(h)-\Xi\ell_j(h)}_{\text{natural growth}}+\underbrace{\mathcal{I}_j(h)-\mathcal{O}_j(h)}_{\text{net migration}}=0
+%\end{eqnarray*}
+%\vspace{-0.5cm}
+%%\begin{itemize}
+%%\item $\omega_j(h)-\Xi\ell_j(h)$ \textbf{natural growth}
+%%\item $\mathcal{O}_j(h)$ \textbf{out-migration} and $\mathcal{I}_j(h)$ \textbf{in-migration}, with:
+%%\vspace{-0.5cm}
+%\small
+%\begin{eqnarray*}
+%&&\hspace{-1.8cm}\mathcal{O}_j(h)= u_j(h)\sum_{k\neq j} \theta_{jk} \int_{\mathcal{P}^0_{jk}(h)}v_k(y)dy+\int m_j(h,p)\left(\sum_{k\neq j} \zeta\theta_{jk}  \int_{\mathcal{P}^c_{jk}(h,p)}v_k(y) dy\right)dp\\
+%&&\hspace{-1.8cm}\mathcal{I}_j(h)=\sum_{k\neq j} \left(u_k(h)\theta_{kj}  \int_{\mathcal{P}^0_{kj}(h)}v_j(y)dy+\int m_k(h,p) \left(\zeta\theta_{kj} \int_{\mathcal{P}^c_{kj}(h,p)}v_j(y) dy\right)dp\right)
+%\end{eqnarray*}\normalsize
+%%\end{itemize}
+%\medskip
+%\item Cities are more skill-intensive when they are more likely to attract and/or retain more high-skilled workers  
+%\begin{equation*}
+%\small{\underbrace{\int h\left(\tfrac{\ell_j(h)}{L_j}\right)dh}_{\text{skill mix}}=\overline{h}+\frac{1}{\Xi}\Bigg[\underbrace{\int h\left(\tfrac{\mathcal{I}_j(h)}{L_j}\right)dh}_{\text{brain gain}}-\underbrace{\int h\left(\tfrac{\mathcal{O}_j(h)}{L_j}\right)dh}_{\text{brain drain}}\Bigg]}
+%\end{equation*}
+%\end{itemize}
+%\end{frame}
+
+
+\begin{frame}\frametitle{Searching, Matching and Migrating: ``Closed'' forms}
+%\framesubtitle{Risk-neutral agents maximize discounted (at rate $r$) lifetime utility or profit}
+
+\begin{itemize}
+\item Conditional on surplus, closed forms for unmatched agents:
+\small
+\begin{eqnarray*}
+\hspace{-1.2cm}(r+\Xi) \V^u_j(h) 
+ &=&b-R_j +\beta\sumktot  \theta_{jk} \int_{\mathcal{P}^0_{jk}(h)}  \Su_{jk}(h,y) v_k(y)dy\\
+\hspace{-1.2cm} r \Pi^v_j(p) 
+&=& -\psi R_j+(1-\beta) \sumktot \theta_{kj}
+\int_{\mathcal{H}^0_{kj}(p)}   \Su_{kj}(x,p) u_k(x)dx\\
+&+&(1-\beta) \zeta\sumktot \theta_{kj}\int_{\mathcal{H}^0_{kj}(p)}\int_{\mathcal{P}^f_{kj}(x,p)} \left[ \Su_{kj}(x, p)- \Su_{kk}(x,y) \right] m_k(x,y)dydx\notag
+ \end{eqnarray*}\normalsize
+
+\item This allows us to recover a closed-form expression for match product:\small
+\begin{eqnarray*}
+\hspace{-1cm}r\mathbb{P}_j(h,p)&=& f(h,p)-(1+\psi)R_j -(\delta+\Xi) \textcolor{blue}{\Su_{jj}(h,p)}-\Xi\V^u_j(h)\\\notag
+&+& \zeta\sumktot \theta_{jk}
+\int_{\mathcal{P}^c_{jk}(h,p)}\beta\left[\Su_{jk}(h, y)-\Su_{jj}(h,p)\right] v_k(y)dy
+\end{eqnarray*}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}\frametitle{Searching, Matching and Migrating: Operationalization}
+\begin{center}
+\begin{tabular}{|cc|}
+\hline\label{tab:func}
+&\\[-2ex]
+Model & Parameterization\\
+&\\[-2ex]
+\hline
+&\\[-2ex]
+$R_j$ & $ R_0 + R_1 (L_j+\psi N_j)^{R_2}$ \\
+&\\[-2ex]
+$f(h,p)$& $[h^{(\rho-1)/\rho}+p^{(\rho-1)/\rho}]^{\rho/(\rho-1)}$\\
+%&\\[-2ex]
+%$\Gamma_j$ & $\Gamma_0 L_j^{\Gamma_1}$\\
+&\\[-2ex]
+$\varrho_{jl}$ &$\exp(-\varrho d_{jl})$\\
+%&\\[-2ex]
+%$c(p)$ & $p^{-\eta}$\\
+&\\[-2ex]
+$\mathcal{M}(E_j,V_j)$ & $m_0 E_j^{m_1} V_j^{1-m_1}$ \\
+&\\[-2ex]
+$\phi_{jl}$ & $1_{j\neq l} \times\phi$\\
+\hline
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Algorithm}
+For a given $\Theta=\big(\underbrace{\Xi,r}_{\text{Life}},\underbrace{\psi,R_0,R_1,R_2}_{\text{Land}},\underbrace{b,\beta,\delta,\zeta,\rho,m_0,m_1}_{\text{Labor}},\underbrace{\varrho,\phi}_{\text{Space}}\big)$,\medskip
+\begin{enumerate}
+% \setcounter{enumi}{-1}
+\item Assume $\Su_{jl}(h,p)$, $u_j(h)$, $m_j(h,p)$ and $\theta_{jl}$ known
+\item Compute $\ell_j(h)$, $L_j$, $U_j$, $V_j$ (from $\theta_{jl}$), $N_j$ and $R_j$
+\item Construct $\Pi_j^v(p)$\label{step1}
+\item Find $\up_j$ from the zero-profit cutoff condition
+\item Recover $v_j(p)$
+\item Update $u_j(h)$ and $m_j(h,p)$ using steady state conditions
+%\item Update $\ell_j(h)$, $L_j$, $U_j$, $V_j$, $\theta_{jl}$, $N_j$ and $R_j$
+\item Construct $\V^u_j(h)$ and $\mathbb{P}_j(h,p)$ and update $\Su_{jl}(h,p)$ from its definition\label{stepfin}
+\item Repeat steps~\ref{step1} to~\ref{stepfin} until convergence.
+%\item Update $\theta_{jk}$ using $\int \Pi_j^v(p) d \widetilde{n}(p)= c^e$.  
+\end{enumerate}
+\end{frame}
+
+\section{Example 2}
+
+\frame{\tableofcontents[currentsection,hideothersubsections,currentsubsection]}
+
+\begin{frame}\frametitle{Discrete Mixing Distributions (1)}
+\begin{itemize}
+ \item Consider a discrete choice model
+ \item An agent $i$ obtains utility $U_{ijt}$ from product $j$ at time $t$. 
+ \begin{equation*}
+  U_{ijt} = \beta_i x_{ijt} + \epsilon_{ijt}  
+ \end{equation*}
+ with 
+\begin{itemize}
+\item $\epsilon_{ijt}$ is iid and extreme value distributed. 
+\item $\beta_i \sim f(\beta \mid \theta)$ where $\theta$ represents the parameters of the distribution 
+\end{itemize}
+\item Let $y_{it}$ denote the alternative that agent $i$ chooses in situation $t$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Mixing Distributions (2)}
+\begin{itemize}
+ \item Conditional on $\beta$, the probability of $y_i$ is 
+ \begin{equation}
+  K_i(\beta) = \prod_{t} \dfrac{\exp(x_{i y_i t})}{\sum_j \exp(\beta x_{ijt})}
+ \end{equation}
+ \item The choice probability is 
+\begin{equation*}
+P_i(\theta) = \int K_i(\beta) f(\beta \mid \theta) d\beta
+\end{equation*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Mixing Distributions (3)}
+\begin{itemize}
+ \item For discrete distribution with support at $\beta_c$, $c= 1,\ldots,C$, the choice probability is 
+\begin{equation}
+ P_i(\theta) = \sum_c s_c K_i(\beta_c)
+\end{equation}
+ where $s_c =  f(\beta_c \mid \theta)$ is the share of the population that has coefficients $\beta_c$. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Mixing Distributions (4): EM}
+\begin{itemize}
+ \item Select initial values $\beta_c^0$ and $s_c^0$ $\forall$ c. Probably start with equal shares and estimates from a logit for partitions of the sample into C subsamples. 
+ \item Calculate the weights as 
+ \begin{equation}
+  h^0_{ic}(\theta^0) = \dfrac{s^{0}_{c} K_n(\beta_c^0)}{\sum_{m} s^0_m K_n(\beta_{m}^0)} 
+ \end{equation}
+ \item Update the shares as
+ \begin{equation}
+  s^1_c = \dfrac{\sum_n h^0_{ic}}{\sum m \sum_i h^0_{}}
+ \end{equation}
+\item Run $C$ standard logits on the data using weights $h^0_{nc}$ in the $c_{th}$ run, and derive $\beta^1_c$
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Practice}
+\begin{itemize}
+\item Number of iterations.
+\item Size of the update step.
+\item Convergence criteria. 
+\end{itemize}
+\end{frame}
+
+\section{Computation}
+
+\frame{\tableofcontents[currentsection,hideothersubsections,currentsubsection]}
+
+
+\begin{frame}\frametitle{Fundamentals}
+\begin{itemize}
+ \item ?solve or help(solve). 
+ \item R is case sensitive. 
+ \item ``<-'' is an assignment operator. 
+ \item Avoid loops in R. 
+\end{itemize}
+
+\end{frame}
+
+\end{document}
+
+

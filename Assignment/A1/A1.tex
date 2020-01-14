@@ -1,0 +1,570 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,left=2.5cm,right=2.5cm,bottom=3cm,top=2.5cm]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{setspace,dsfont,amsmath,amssymb}
+\usepackage[longnamesfirst,nonamebreak]{natbib}
+\usepackage{longtable,booktabs,pdfpages}
+\usepackage[english]{babel}
+\usepackage{eurosym,multirow,hyperref,placeins}
+\usepackage[lastexercise]{exercise}
+
+\hypersetup{
+    colorlinks,%
+    citecolor=blue,%
+    filecolor=black,%
+    linkcolor=blue,%
+    urlcolor=black}
+
+
+\setlength{\textwidth}{6.3in}
+\setlength{\textheight}{23.0cm}
+\setlength{\oddsidemargin}{0in}
+\setlength{\abovetopsep}{2ex}
+\newcommand{\Lik}{\mathcal{L}}
+\newcommand{\lau}{\lambda_u}
+\newcommand{\lae}{\lambda_e}
+\newcommand{\1}{\mathbb{1}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\de}{\delta}
+\newcommand{\ow}{\overline{w}}
+\newcommand{\uw}{\underline{w}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+
+\begin{document}
+\doublespacing
+
+\section{Class Assignment: Introduction to R}
+
+\subsection{Introduction}
+
+Using this sample code, 
+
+\begin{verbatim}
+install.packages("BB")
+library(BB)
+source("A1.R")
+?for
+??rpareto
+dir()
+1+1
+2/2
+save.image("misc.RDATA")
+1:10
+30%%4
+setwd("/Users/ms486/Dropbox/Papers/Progress")
+getwd()
+ls()
+2/0
+log(-1)
+sum(1:10)
+\end{verbatim}
+
+\begin{Exercise}[title=Introduction]
+\begin{enumerate}
+\item Create a directory for this class and store your script ``a0.R" 
+\item Install the packages, Hmisc, gdata,boot,xtable,MASS,moments,snow,mvtnorm
+\item Set your working directory
+\item List the content of your directory and the content of your environment
+\item Check whether 678 is a multiple of 9
+\item Save your environment
+\item Find help on the function mean, cut2
+\item Find an operation that returns NaN (Not A Number)
+\end{enumerate}
+\end{Exercise}
+
+\subsection{Objects}
+
+\paragraph{Vectors, Matrix, Arrays}
+\begin{verbatim}
+vec0  = NULL
+vec1  = c(1,2,3,4)
+vec2  = 1:4
+vec3  = seq(1,4,1)
+vec4  = rep(0,4)
+sum(vec1)
+str(vec1)
+prod(vec1)
+mat1  = mat.or.vec(2,2)
+mat2  = matrix(0,ncol=2,nrow=2,byrow=T)
+mat3  = cbind(c(0,0),c(0,0))
+mat4  = rbind(c(1,1),c(0,0))
+mat5  = matrix(1:20,nrow=5,ncol=4)
+mat5[1:2,3:4]
+mat5[1,]
+arr1  = array(0,c(2,2))
+dim(mat4)
+dim(vec2)
+length(vec2)
+length(mat1)
+class(mat4)
+\end{verbatim}
+
+\begin{Exercise}[title=Object Manipulation]
+\begin{enumerate}
+\item Print Titanic, and write the code to answer these questions (one function (sum) , one operation)
+\begin{enumerate}
+\item Total population
+\item Total adults
+\item Total crew
+\item $3^{rd}$ class children
+\item $2^{nd}$ class adult female
+\item $1^{st}$ class children male
+\item Female Crew survivor
+\item $1^{st}$ class adult male survivor
+\end{enumerate}
+\item Using the function \emph{prop.table}, find
+\begin{enumerate}
+\item The proportion of survivors among first class, male, adult
+\item The proportion of survivors among first class, female, adult
+\item The proportion of survivors among first class, male, children
+\item The proportion of survivors among third class, female, adult
+\end{enumerate}
+\end{enumerate}
+\end{Exercise}
+
+\begin{Exercise}[title=Vectors - Introduction]
+\begin{enumerate}
+\item Use three different ways, to create the vectors 
+\begin{enumerate}
+\item $a=1,2,\ldots,50$
+\item $b=50,49,\ldots,1$
+\item[Hint]: rev
+\end{enumerate} 
+\item Create the vectors 
+\begin{enumerate}
+\item $a=10,19,7,10,19,7,\ldots,10,19,7$ with 15 occurrences of 10,19,7
+\item $b=1,2,5,6,\ldots,1,2,5,6$ with 8 occurrences of 1,2,5,6
+\item[Hint]: rep
+\end{enumerate} 
+\item Create a vector of the values of $log(x)sin(x)$ at $x=3.1,3.2,\ldots,6$
+\item Using the function sample, draw 90 values between (0,100) and calculate the mean. Re-do the same operation allowing for replacement. 
+\item Calculate 
+\begin{enumerate}
+\item $\sum_{a=1}^{20}\sum_{b=1}^{15}\dfrac{exp(\sqrt{a})log(a^5)}{5+cos(a)sin(b)}$
+\item $\sum_{a=1}^{20}\sum_{b=1}^{a} \dfrac{exp(\sqrt{a})log(a^5)}{5+exp(ab)cos(a)sin(b)}$
+\end{enumerate}
+\item Create a vector of the values of $\exp(x) \cos(x)$ at x = 3, 3.1, ...6.
+\end{enumerate}
+\end{Exercise}
+
+\begin{Exercise}[title=Vectors - Advanced]
+\begin{enumerate}
+\item Create two vectors $xVec$ and $yVec$ by sampling 1000 values between 0 and 999.
+\item Suppose $xVec = (x_1, \ldots, x_n)$ and $yVec = (y_1, \ldots, y_n)$
+\begin{enumerate}
+\item Create the vector $(y_2-x_1,\ldots, y_n -x_{n-1})$ denoted by $zVec$.
+\item Create the vector $(\dfrac{sin(y_1)}{\cos(x_2},\dfrac{sin(y_2)}{\cos(x_3}, \ldots, \dfrac{sin(y_{n-1})}{\cos(x_n})$ denoted by $zVec$.
+\item Create a vector $subX$ which consists of the values of X which are $\geq$ 200.
+\item What are the index positions in yVec of the values which are $\geq$ 600.
+\end{enumerate}
+\end{enumerate}
+\end{Exercise}
+
+
+\begin{Exercise}[title=Matrix]
+\begin{enumerate}
+\item Create the matrix $A  = \left| \begin{array}{ccc}
+ 1 & 1 & 3 \\
+5  & 2 & 6 \\
+-2 &-1 & -3 \end{array} \right|$
+\begin{enumerate}
+\item Check that $A^3$=0 (matrix 0).
+\item Bind a fourth column as the sum of the first and third column
+\item Replace the third row by the sum of the first and second row
+\item Calculate the average by row and column. 
+\end{enumerate}
+\item Consider this system of linear equations: 
+\begin{eqnarray}
+2x  +   y  +  3z  =  10   \\ 
+ x  +   y  +   z  =   6   \\
+ x  +  3y  +  2z  =  13 
+ \end{eqnarray}
+ \item Solve this equation. 
+\end{enumerate}
+\end{Exercise}
+
+\begin{Exercise}[title=Functions]
+ \begin{enumerate}
+ \item Write a function \emph{fun1} which takes two arguments (a,n) where (a) is a scalar and n is a positive integer, and returns
+ \begin{equation*}
+ a+\dfrac{a^2}{2}+\dfrac{a^3}{3} + \ldots + \dfrac{a^n}{n}
+ \end{equation*}
+ \item Consider the function 
+ \begin{equation}
+f(x)  = \left\{ \begin{array}{ll}
+         x^2+2x+|x| & \mbox{if $x < 0$};\\
+         x^2+3 + \log(1+x) & \mbox{if $0 \leq x < 2$};\\
+         x^2 + 4x -14 & \mbox{if $x \geq 2$}.\end{array} \right. 
+ \end{equation}
+Evaluate the function at -3, 0 and 3. 
+\end{enumerate}
+\end{Exercise}
+
+
+\begin{Exercise}[title= Indexes]
+\begin{enumerate}
+\item Sample 36 values between 1 and 20 and name it $v1$ 
+\item Use two different ways, to create the subvector of elements that are not in the first row. \emph{Hint: which and subset can not be used.} Check x[a] and x[-a]. 
+\item Create a logical element (TRUE or FALSE), v2, which is true if $v1>5$. Can you convert this logical element into a dummy 1 (TRUE) and 0 (FALSE)?
+\item Create a matrix m1 $[6\times 6]$ which is filled by row using the vector v1. 
+\item Create the following object 
+\begin{verbatim}
+x = c(rnorm(10),NA,paste("d",1:16),NA,log(rnorm(10)))
+ \end{verbatim}
+\item Test for the position of missing values, and non-finite values.
+Return a subvector free of missing and non-finite values. 
+\end{enumerate}
+\end{Exercise}
+
+
+\begin{Exercise}[title=Data Manipulation]
+\begin{enumerate}
+\item Load the library AER, and the dataset (data("GSOEP9402")) to be named dat. 
+\item What type of object is it? Find the number of rows and column? Can you provide the names of the variables?
+\item Evaluate and plot the average annual income by year. 
+\item Create an array that illustrates simultaneously the income differences (mean) by gender, school and memployment. 
+\end{enumerate}
+\end{Exercise}
+
+\begin{Exercise}[title=First regression]
+\begin{enumerate}
+\item Load the dataset (data("CASchools")) to be named data.
+\item Using the function lm, run a regression of read on the following variables: district, school, county, grades, students, teachers, calworks, lunch, computer, expenditure, income and english. Store this regression as reg1. 
+\item Can you run a similar regression by specifying, \begin{verbatim}
+formula = y ~ x. lm(formula)
+\end{verbatim} Create reg2, that uses only the 200 first observations.  
+\end{enumerate}
+\end{Exercise}
+
+\begin{Exercise}[title=Advanced indexing]
+\begin{enumerate}
+\item Create a vector \emph{lu} of 200 draws from a pareto distribution (1,1). How many values are higher than 10. Replace these values by draws from a logistic distribution (6.5,0.5). 
+\item Create a vector \emph{de} of 200 draws from a normal distribution (1,2). Set $de = \log(de)$, and count the number of missing values or negative values. Replace these values by draws from a normal distribution (0,1) truncated at 0. \emph{hint:truncnorm}
+\item Create two vectors, \emph{orig} and \emph{dest} as 200 draws from a uniform distribution [0,1]. 
+\item Create two matrices, \emph{hist} and \emph{dist} as 200*200 draws from a uniform distribution [0,1]. 
+\item Consider this function
+
+\begin{equation}
+q_{jl}(w) =  \frac{r+de_j}{r+de_l} w + lu_j log(w) - lu_l (1+log(w)) + \frac{r+de_j}{r+de_l} \sum_{k \neq j} su_{jk} - \sum_{k \neq l} su_{lk} + \frac{r+de_j}{r+de_l} \sum_{k \neq j} se_{jk} - \sum_{k \neq l} se_{lk}
+\end{equation}
+
+where 
+\begin{eqnarray}
+su_{j,l} = \log(orig_j + dest_l + dist_{j,l})/(1+\log(orig_j + dest_l + dist_{j,l}))\\
+se_{j,l} = \exp(orig_j + dest_l + hist_{j,l})/(1+\exp(orig_j + dest_l + hist_{j,l}))
+\end{eqnarray}
+\item Create the matrices su and se.
+\item Set r = 0.05. Create a function to evaluate $q_{jl}(.)$. Evaluate $q_{jl}(9245)$ for all pairs (j,l). 
+\item Create gridw, which consists of a sequence from 9100 to 55240 of length 50. 
+\item Using the function sapply, evaluate $q_{jl}$. Store the ouput into an array of dimension $(50\times 200 \times 200)$. How long does it take to evaluate $q_{jl}()$ for each value of w? 
+\end{enumerate}
+\end{Exercise}
+
+
+\paragraph{List}
+
+\begin{verbatim}
+li      = list()
+li[[1]] = mat1
+li[[2]] = Titanic
+li1     = list(x=mat1,y=Titanic)
+li1$x
+li2$y
+\end{verbatim}
+
+\paragraph{Dataframe}
+
+\begin{verbatim}
+data=data.frame(x=rnorm(100),y=runif(100))
+data
+browse(data)
+edit(data)
+data[,1]
+data[1,]
+data$x
+names(data)
+attach(data)
+x
+detach(data)
+y
+\end{verbatim}
+
+\paragraph{Tests and Conversion}
+
+\begin{verbatim}
+is.na()
+is.list()     as.list()
+is.factor()   as.factor()	  
+is.matrix()   
+is.vector()
+is.array()
+is.finite()
+a==b
+a=>b
+a<=b
+\end{verbatim}
+
+\begin{Exercise}[title = Tests and indexing]
+\begin{enumerate}
+\item Test if $c(1,2,3)$ is an array? a vector? a matrix?  
+\item x0 = rnorm(1000); Using the function \emph{table()} count the number of occurrences of $x0>0$, $x0>1$, $x0>2$, $x0>0.5$, $x0<1$ and $x0>-1$
+\item \begin{verbatim}
+x1 = cut2(runif(100,0,1),g=10) 
+levels(x1)=paste("q",1:10,sep="")
+\end{verbatim}
+\item Test whether or not x1 is a factor?
+\item Verify that "q1" has 10 occurences.
+\item Convert x1 into a numeric variables. What happens to the levels?
+\item \begin{verbatim}
+rand = rnorm(1000)
+\end{verbatim}
+\item Using the function \emph{which()} find the indexes of positive values.
+\item Create the object w of positive values of x using:
+\begin{enumerate}
+ \item Which
+ \item Subset
+ \item By indexing directly the values that respect a condition 
+ \end{enumerate} 
+\end{enumerate}
+\end{Exercise}
+
+
+\subsection{Basic functions}
+
+\FloatBarrier
+\begin{table}[!ht]
+\caption{Basic Functions}
+\begin{center}
+\begin{tabular}{ll}
+\hline 
+Function & 	Description \\ \hline 
+abs(x) & 	absolute value \\
+sqrt(x) 	& square root \\
+ceiling(x) & 	ceiling(3.475) is 4\\
+floor(x) & 	floor(3.475) is 3\\
+trunc(x) & 	trunc(5.99) is 5\\
+round(x, digits=n) & 	round(3.475, digits=2) is 3.48\\
+signif(x, digits=n) & 	signif(3.475, digits=2) is 3.5\\
+log(x) & 	logarithm \\
+exp(x) & 	$e^x$ \\ \hline 
+substr(x, start=n1, stop=n2) 	& Extract or replace substrings in a character vector.\\
+&x = "abcdef" , substr(x, 2, 4) is "bcd"\\
+grep(pattern, x ) &	Search for pattern in x. \\
+sub(pattern, replacement, x) &	Find pattern in x and replace with replacement text. \\
+strsplit(x, split) & 	Split the elements of character vector x at split.\\
+strsplit("abc", "") & returns 3 element vector "a","b","c"\\
+paste(..., sep="")  & 	Concatenate strings\\
+toupper(x) &	 Uppercase\\
+tolower(x) & 	Lowercase\\
+\hline 
+\end{tabular} 
+\end{center}
+\end{table}
+\FloatBarrier
+
+\subsection{Language}
+
+\begin{verbatim}
+if (condition) statement 
+for (i in range) statement
+while (condition) statement
+fun = function(input) {calculation return(output)} 
+fun = function(input) {calculation output} 
+\end{verbatim}
+
+
+\begin{Exercise}[title = Programming]
+\begin{verbatim}
+Write a program that asks the user to 
+type an integer N and compute u(N) defined with :
+u(0)=1
+u(1)=1
+u(n+1)=u(n)+u(n-1)
+ \end{verbatim}
+
+\begin{enumerate}
+\item Evaluate  $1^2 + 2^2 +3^2 + \ldots 400^2$.
+\item Evaluate $1 \times 2+2\times3+3\times4+ ... + 249\times250$
+\item Create a function "crra" with two arguments $(c,\theta)$ that returns $\frac{c^{1-\theta}}{1-\theta}$. Add an if condition such that the utility is given by the log when $\theta \in [0.97,1,03] \approx 1$
+\item  Create a function "fact" that returns the factorial of a number
+\end{enumerate}
+\end{Exercise}
+
+
+
+\begin{Exercise}[title = Apply Functions]
+\begin{enumerate}
+\item Using this object, \begin{verbatim}
+m = matrix(c(rnorm(20,0,10), rnorm(20,-1,10)), nrow = 20, ncol = 2)
+\end{verbatim} Calculate the mean, median, min, max and standard deviation by row and column.
+\item Using the dataset iris in the package "datasets", calculate the average \textbf{Sepal.Length} by \textbf{Species}. Evaluate the sum log of \textbf{Sepal.Width} by \textbf{Species}.
+\item \begin{verbatim}
+y1 = NULL; for (i in 1:100) y1[i]=exp(i)
+y2 = exp(1:100)
+y3 = sapply(1:100,exp)
+\end{verbatim}
+\begin{enumerate}
+\item Check the outcome of these three operations.
+\item Using proc.time() or system.time(), compare the execution time of these three equivalents commands.
+\end{enumerate}
+\end{enumerate}
+\end{Exercise}
+
+
+\begin{table}
+\caption{Apply functions}
+\begin{center}
+\begin{tabular}{cc}
+\hline
+Functions    &      Usage\\ \hline
+apply        &    Apply Functions Over Array Margins \\
+by           &     Apply a Function to a Data Frame Split by Factors \\
+eapply       &    Apply a Function Over Values in an Environment \\
+lapply       &     Apply a Function over a List or Vector \\
+mapply       &     Apply a Function to Multiple List or Vector Arguments \\
+rapply       &     Recursively Apply a Function to a List \\
+tapply       &     Apply a Function Over a Ragged Array \\
+\hline 
+\end{tabular} 
+\end{center}
+\end{table}
+\FloatBarrier
+
+\subsection{Statistics}
+\FloatBarrier
+
+\begin{table}
+\caption{Statistical distributions}
+\begin{center}
+\begin{tabular}{ll}
+name &	description\\ \hline
+dname( ) &	density or probability function\\
+pname( ) &	cumulative density function\\
+qname( ) &	quantile function\\
+rname( ) &	random deviates \\ \hline 
+\end{tabular} 
+\end{center}
+\end{table}
+
+\begin{table}
+\caption{Statistical Functions}
+\begin{center}
+\begin{tabular}{ll}
+Function & 	Description \\ \hline 
+mean(x, trim=0,na.rm=FALSE) &	mean of object x\\
+sd(x), var(x) 	& standard deviation, variance of object(x) \\
+median(x) &	median \\
+quantile(x, probs) & x is the numeric vector and probs is a numeric vector with probabilities \\
+range(x) &	range \\
+sum(x) &	sum \\
+diff(x, lag=1) &	lagged differences, with lag indicating which lag to use \\
+min(x) & 	minimum \\
+max(x) &	maximum \\ \hline 
+\end{tabular} 
+\end{center}
+\end{table}
+
+\begin{table}
+\caption{Statistical distributions}
+\begin{center}
+\begin{tabular}{ll}
+Distribution 	& R name \\ \hline 
+Beta 	& beta 	\\
+Lognormal &	lnorm \\
+Binomial &	binom 	\\
+Negative Binomial &	nbinom \\
+Cauchy & 	cauchy 	\\
+Normal &	 norm \\
+Chisquare &	chisq \\ 
+Poisson & 	pois \\
+Exponential &	exp \\ 
+Student t &	t \\
+F 	& f 	\\
+Uniform &	unif \\
+Gamma 	& gamma  \\
+Tukey 	& tukey \\
+Geometric &	geom \\	
+Weibull 	& weib \\
+Hypergeometric &	hyper \\	
+Wilcoxon &	wilcox \\
+Logistic &	logis \\	 \hline 	 
+\end{tabular} 
+\end{center}
+\end{table}
+
+\begin{Exercise}[title = Simulating and Computing]
+\begin{enumerate}
+\item Simulate a vector x of 10,000 draws from a normal distribution. Use the function summary to provide basic characteristics of x.
+\item Create a function \emph{dsummary} that returns, the minimum, the 1st decile, the 1st quartile, the median, the mean, the standard deviation, the 3rd quartile, the 9th decile, and the maximum. 
+\item Suppose $X \sim N(2,0.25)$. Evaluate 
+ $f(0.5), F(2.5), F^{-1}(0.95)$
+\item Repeat if X has t-distribution with 5 degrees of freedom.
+\item Suppose $X \sim P(3,1)$, where P is the pareto distribution. Evaluate $f(0.5), F(2.5), F^{-1}(0.95)$
+\end{enumerate}
+\end{Exercise}
+
+
+
+%\begin{Exercise}[title = Tests and indexing]
+%\end{Exercise}
+%
+%\begin{enumerate}
+%\end{enumerate}
+
+\begin{Exercise}[title = Moments]
+Consider a vector $V = rnorm(100,-2,5)$.
+\begin{enumerate}
+\item Evaluate n as the length of V.
+\item Compute the mean $m = \dfrac{1}{n}\sum_{i=1}^{i=n} V_i$
+\item Compute the variance $s^2 = \dfrac{1}{n-1} \sum_i^n (V_i-m)^2$
+\item Compute the skewness $\gamma_1 = \dfrac{1}{n} \dfrac{(V_i-m)^3}{s^3}$
+\item Compute the kurtosis $k_1 = \dfrac{1}{n} \dfrac{(V_i-m)^4}{s^4} - 3$
+\end{enumerate}
+\end{Exercise}
+
+
+\FloatBarrier
+\begin{table}
+\caption{Matrix operation}
+\begin{center}
+\begin{tabular}{ll}
+Function (Operator) 	& Description \\ \hline 
+$A * B$
+	& Element wise multiplication \\
+$A\%*\%B$
+ &	matrix multiplication \\
+t(A) &	Transpose \\	
+diag(a) &	Create a diagonal matrix with a elements \\
+diag(A) &	Return the diagonal of A \\	
+Solve(A) &	inverse of A \\	
+ \hline 	 
+\end{tabular} 
+\end{center}
+\end{table}
+
+\begin{Exercise}[title = OLS]
+\begin{enumerate}
+\item Create a matrix \emph{X} of dimension \emph{(1000,10)}. Fill it with draws from a beta distribution with shape1 parameter 2, and shape 2 parameter 1. Make sure that there is no negative. 
+\item Create a scalar denoted by $\sigma^2$ and set it to 0.5. Generate a vector $\beta$ of size 10. Fill it with draws from a \emph{Gamma} distribution with parameters 2 and 1. 
+\item Create a vector $\epsilon$ of 1000 draws from a normal distribution. 
+\item Create $Y=  X\beta + \sqrt{\sigma^2} *\epsilon$
+\item Recover $\hat{\beta} = (X'X)^{-1}(X'Y)$
+\item Evaluate $\widehat{\epsilon} = \widehat{y}-y$. Plot the histogram (filled in grey) and the kernel density of the distribution of the error term. 
+\item Estimate $\sigma^2 = \dfrac{\widehat{\epsilon}'\widehat{\epsilon}}{n-p-1}$, and $\V(\widehat{\beta})= \sigma^2 (X'X)^{-1}$
+\item Create \emph{param} that binds $(\beta,\sqrt{V(\widehat{\beta})})$. Using the command \emph{lm}, check these estimates.  
+\item Construct a confidence interval for $\beta$. 
+\item Redo the exercise by setting $\sigma^2=0.01$. How are your confidence intervals for $\beta$. 
+\end{enumerate}
+\end{Exercise}
+
+%\subsection{Data manipulation}
+%\subsection{Plotting}
+%\subsection{Problem Sets}
+
+
+
+\end{document}

@@ -1,0 +1,23 @@
+\frametitle{Stable Matching (2)}
+Initially all m in M and w in W are free.
+\begin{footnotesize}
+\begin{verbatim}
+While there is a man m who is free and hasn't
+proposed to every woman w
+Choose such a man m
+Let w be the highest-ranked woman in m's preference list
+to which m has not yet proposed
+   If w is free then
+   (m, w) become engaged
+   Else w is currently engaged to m'
+   If w prefers m' to m then
+     m remains free
+   Else w prefers m to m'
+     (m, w) become engaged
+     m' becomes free
+
+Endif
+   Endif
+Endwhile
+\end{verbatim}
+\end{footnotesize}
