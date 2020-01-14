@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.9.25)  14 JAN 2020 15:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.9.25)  14 JAN 2020 16:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1077,6 +1077,8 @@ Overfull \hbox (47.60136pt too wide) in alignment at lines 500--500
 
 ] [29
 
+] [30
+
 ]
 \tf@nav=\write6
 \openout6 = `Algorithm.nav'.
@@ -1087,17 +1089,17 @@ Overfull \hbox (47.60136pt too wide) in alignment at lines 500--500
 \tf@snm=\write8
 \openout8 = `Algorithm.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 629.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 629.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 635.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 635.
  (./Algorithm.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 629.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 629.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 635.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 635.
 Package rerunfilecheck Info: File `Algorithm.out' has not changed.
 (rerunfilecheck)             Checksum: 1491A351453B0350DFD1DE2DAA6BFC6B;175.
  ) 
 Here is how much of TeX's memory you used:
- 20280 strings out of 492982
- 370061 string characters out of 6134896
+ 20282 strings out of 492982
+ 370080 string characters out of 6134896
  484669 words of memory out of 5000000
  23297 multiletter control sequences out of 15000+600000
  17207 words of font info for 69 fonts, out of 8000000 for 9000
@@ -1124,10 +1126,10 @@ st/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /public/amsfonts/cm/cmtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
 /amsfonts/symbols/msbm10.pfb>
-Output written on Algorithm.pdf (29 pages, 267795 bytes).
+Output written on Algorithm.pdf (30 pages, 269467 bytes).
 PDF statistics:
- 1276 PDF objects out of 1440 (max. 8388607)
- 1172 compressed objects within 12 object streams
- 66 named destinations out of 1000 (max. 500000)
+ 1315 PDF objects out of 1440 (max. 8388607)
+ 1209 compressed objects within 13 object streams
+ 68 named destinations out of 1000 (max. 500000)
  81 words of extra memory for PDF output out of 10000 (max. 10000000)
 
