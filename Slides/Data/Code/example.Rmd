@@ -1,0 +1,78 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+R Data Example 
+
+
+```{r}
+
+library(readstata13)
+library(xtable)
+library(plyr)
+library(dplyr)
+library(ggplot2)
+library(data.table)
+
+savepath = "/home/ms486/Dropbox/papers/education/EducSearch/Tex/educ28/figures_paper/"
+datapath = "../Data/descriptive_data/"
+savetab  = "/home/ms486/Dropbox/papers/education/EducSearch/Tex/educ28/tables_paper/"
+
+mytheme = theme(legend.title=element_blank(),
+                legend.position="bottom",
+                panel.border = element_blank(),
+                panel.grid.major = element_blank(),
+                panel.grid.minor = element_blank(),
+                legend.text = element_text(size=12,face="bold"),
+                strip.text = element_text(size = 12,face="bold"))
+
+
+dat <- read.dta13("~/Dropbox/papers/education/EducSearch/Data/nlsy_new/processdata/nlsy_merged.dta")
+names(dat)
+
+dat1 = subset(dat,select=c(year,job_req_educ),!is.na(job_req_educ))
+tab  =  dat1 %>% group_by(year,job_req_educ) %>% summarise(n = n()) %>% mutate(freq = n / sum(n))
+tab
+
+graph = ggplot(tab, aes(x=year, y=freq,color=as.factor(job_req_educ))) + geom_line(size=2)  + ylab("Rates") + xlab("Years") + xlim(1980,2000)
+graph = graph +  mytheme + theme(axis.title = element_text(size = rel(1.1)),
+                                 axis.text = element_text(size = rel(1.1)),
+                                 strip.text = element_text(size = 12),
+                                 panel.spacing = unit(1, "lines"))
+graph
+
+## education 
+tab        = read.csv("~/Dropbox/Git/tab.csv", header=FALSE)
+tab        = cbind(seq(2010,1980,by=-1),tab)
+names(tab) = c("Years","Less than a High School Diploma", "High School Diploma", "Some College", "Bachelor's Degree")
+tab
+
+tab2        = cbind(tab[,1:2],tab[,3]+tab[,4],tab[,5])
+names(tab2) = c("Years","Less than a High School Diploma", "High School Diploma", "Bachelor's Degree")
+
+tab1      =  melt(tab2,id="Years")
+
+mytheme = theme(legend.title=element_blank(),
+                legend.position="bottom",
+                panel.border = element_blank(),
+                panel.grid.major = element_blank(),
+                panel.grid.minor = element_blank())
+
+
+
+graph = ggplot(tab1, aes(x=Years, y=value,color=variable)) + geom_line(size=2) + ylab("Rates") + xlab("Years") 
+graph = graph +  mytheme + theme(axis.title = element_text(size = rel(1.1)),
+                                 axis.text = element_text(size = rel(1.1)),
+                                 strip.text = element_text(size = 12),
+                                 panel.spacing = unit(1, "lines"))
+graph
+
+ggsave(paste0(savepath, 'education2.pdf'),graph)
+
+```
+
+
+
+
